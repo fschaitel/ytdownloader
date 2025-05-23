@@ -4,6 +4,7 @@ import uuid
 import os
 
 app = Flask(__name__)
+
 DOWNLOAD_FOLDER = 'downloads'
 os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 
@@ -35,3 +36,8 @@ def download():
         return send_file(mp3_file, as_attachment=True)
     except Exception as e:
         return f"<p>Erro: {str(e)}</p>"
+
+# ESSA PARTE É ESSENCIAL PARA O RENDER FUNCIONAR
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
